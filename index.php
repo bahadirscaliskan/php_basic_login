@@ -1,7 +1,9 @@
 <?php
 
+// Database bağlantısını bu sayfaya dahil etme
 include_once ('db.php');
 
+//Gerekli html kodları
 echo '<!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +14,18 @@ echo '<!DOCTYPE html>
 <form action="" method = "GET" >
 
   <label for="fname">İsminiz:</label><br>
-  <input type="text" id="fname" name="fname" ><br><br>
+  <input type="text" name="fname" ><br><br>
   <label for="lname">Soyisminiz:</label><br>
-  <input type="text" id="lname" name="lname" ><br><br>
+  <input type="text" name="lname" ><br><br>
   <label for="lsifre">Şifreniz:</label><br>
-  <input type="text" id="lsifre" name="lsifre" ><br><br>
+  <input type="text" name="lsifre" ><br><br>
   <input type="submit" value="Gönder">
 </form>
 </div>
 </body>
 </html>';
 
-
+//İnputlar boşmu diye kontrol ettirme
 if (!empty($_GET)) {
 
   $isim = $_GET['fname'];
@@ -31,24 +33,24 @@ if (!empty($_GET)) {
   $sifre = $_GET['lsifre'];
 
 
-  //$hatavarmi = false;
+  
   if ($isim == "") {
 
       echo "Kullanıcı adı boş bırakılamaz";
-      //$hatavarmi = true;
+      
   } elseif ($soyisim == "") {
 
-      //$hatavarmi = true;
+      
       echo "Kullanıcı soyisim boş bırakılamaz";
 
   } elseif ($sifre == "") {
 
-    //$hatavarmi = true;
+    
     echo "Şifre Giriniz";
 
   } else {
 
-
+      //İlgili inputları doldurduktan sonrasında veritabanında varmı diye kontrol ettirme
       $sorgu = "SELECT * FROM kullanici  WHERE isim = '$isim' AND soyisim = '$soyisim' AND sifre = '$sifre' ";
 
       $sonuc = mysqli_query($dbCon, $sorgu);
